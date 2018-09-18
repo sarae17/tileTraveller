@@ -3,7 +3,7 @@
 # Við byðjum notandann um input þangað til hann slær in valid input. og færum notandann á viðeigandi reit.
 # þangað til notandinn er kominn á reit 3,1 þá lýkur forritið
 
-def walls (x,y,North,South,West,East):
+def walls (x,y):
     """Defines all the walls of the board"""
     North = True
     West = True
@@ -18,7 +18,7 @@ def walls (x,y,North,South,West,East):
     if y == 3:
         North = False
     
-     if (y == 1):
+    if (y == 1):
         West = False
         East = False
     elif (x == 2) and (y == 2):
@@ -32,7 +32,7 @@ def walls (x,y,North,South,West,East):
 
 def valid_direction (x,y):
     """Prints out the direction user can input"""
-    
+    North,South,West,East=walls(x,y)
     print ('You can travel: ',end='')
     if North:
         print ('(N)orth' ,end='')
@@ -51,30 +51,10 @@ def valid_direction (x,y):
     print('.')
     return (North,South,West,East)
 
-def new_direction 
-while True:
-        direction = input('Direction: ').upper()
-        if direction == 'N' and North:
-            y += 1
-            break
-        elif direction == 'S' and South:
-            y -= 1
-            break
-        elif direction == 'E' and East:
-            x += 1
-            break
-        elif direction == 'W' and West:
-            x -=1
-            break
-        else:
-            print('Not a valid direction!')
-        return x,y
-x = 1
-y = 1
+def new_location (x,y):
+    """Finds the new locations and returns result"""
+    North, South,West,East = walls(x,y)
 
-while not ((x == 3) and ( y == 1)):
-    
-#Impements the new value of x and y and asks for directions
     while True:
         direction = input('Direction: ').upper()
         if direction == 'N' and North:
@@ -91,12 +71,13 @@ while not ((x == 3) and ( y == 1)):
             break
         else:
             print('Not a valid direction!')
-        return x,y
-x=1
-y=1
+    return x,y
+x = 1
+y = 1
+
 while not ((x == 3) and ( y == 1)):
-    North,South,West,East =outerwalls (x,y)
-    North,South,West,East=innerwalls (x,y,North,South,West,East)
-    North,South,West,East=direction (x,y,North,South,West,East)
+    
+    valid_direction(x,y)
+    x, y = new_location(x,y)
 
 print ('Victory!')
